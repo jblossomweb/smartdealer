@@ -8,6 +8,7 @@ Write a JavaScript class using http://jsfiddle.net/ that can be used to calculat
 
 When you instantiate the JavaScript class, you give its constructor a parameter which lists the formulas. For example:
 
+```js
 var carPaymentCalc = new Calculator(
     {
         "MonthlyPayment": "$Factor*$MonthlyInterestRate/($Factor-1)*$FinAmt",
@@ -16,8 +17,11 @@ var carPaymentCalc = new Calculator(
         "FinAmt": "$VehicleCost+$CLDInsurance"
     }
 );
+```
+
 Then, you can call the Calculate method, giving some parameters needed by the formulas, to produce the answer. For example:
 
+```js
 var monthlyPayment = carPaymentCalc.Calculate(
     "MonthlyPayment",
     {
@@ -28,10 +32,13 @@ var monthlyPayment = carPaymentCalc.Calculate(
     }
 );
 // monthlyPayment should be around 296.18
+```
+
 My solution for the class is less than 20 lines of JavaScript code, so if you're much over that, your solution is too complicated.
 
 As a bonus (if you feel that was too easy), how would you change the class to handle a set of formulas that contain circular dependency? For example:
 
+```js
 var carPaymentCalc = new Calculator(
     {
         "MonthlyPayment": "$Factor*$MonthlyInterestRate/($Factor-1)*$FinAmt",
@@ -51,8 +58,11 @@ var monthlyPayment = carPaymentCalc.Calculate(
     }
 );
 // monthlyPayment should be around 297.75
+```
+
 If this is super easy for you, try the guru bonus round: write another method on the JavaScript class that does goal seek. For example:
 
+```js
 var termAtLowerMonthlyPayment = carPaymentCalc.GoalSeek(
     "Term",
     {
@@ -66,3 +76,4 @@ var termAtLowerMonthlyPayment = carPaymentCalc.GoalSeek(
     }
 );
 // termAtLowerMonthlyPayment should be around 54.84
+```
