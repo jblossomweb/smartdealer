@@ -6,7 +6,6 @@ var carPaymentCalc = new Calculator(
         "FinAmt": "$VehicleCost+$CLDInsurance"
     }
 );
-
 var monthlyPayment = carPaymentCalc.Calculate(
     "MonthlyPayment",
     {
@@ -16,4 +15,5 @@ var monthlyPayment = carPaymentCalc.Calculate(
         "CLDInsurance": 200
     }
 );
+alert(monthlyPayment.toFixed(2));
 // monthlyPayment should be around 296.18
