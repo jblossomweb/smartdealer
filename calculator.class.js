@@ -6,9 +6,7 @@ var Calculator = function(formulas) {
 };
 Calculator.prototype.Calculate = function(formula,params){
 	var calculate = this.formulas[formula];
-  if(typeof(calculate) === 'undefined'){
-    return false; //invalid formula
-  }
+  if(typeof(calculate) === 'undefined') return false; //invalid formula
 	for(var param in params){
   		calculate = calculate.replace(new RegExp('\\$'+param,'g'),params[param]);
   	}
