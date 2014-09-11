@@ -3,8 +3,11 @@ var Calculator = function(formulas) {
   	for(var formula in formulas){
   		this.formulas[formula] = formulas[formula];
   	}
+  this.calculating = [];
 };
 Calculator.prototype.Calculate = function(formula,params){
+  if(this.calculating.indexOf(formula) !== -1) return false; // circular dependency
+  this.calculating.push(formula);
 	var calculate = this.formulas[formula];
   if(typeof(calculate) === 'undefined') return false; //invalid formula
 	for(var param in params){
@@ -16,5 +19,6 @@ Calculator.prototype.Calculate = function(formula,params){
   			calculate = calculate.replace(new RegExp('\\'+vars[i],'g'),this.Calculate(vars[i].substr(1),params));
   		}
   	}
+    this.calculating.splice(this.calculating.indexOf(formula),1);
   	return eval(calculate);
 };
