@@ -43,3 +43,28 @@ Calculator.prototype.Calculate = function(formula,params,decimals){
     }
   	return solution;
 };
+Calculator.prototype.GoalSeek = function(seek,goals,params,decimals){
+  decimals = (typeof(decimals) !== 'undefined' && (decimals%1) === 0) ? decimals : 2; //default
+  var increment = Math.pow(10,(0-decimals)); //increment based on desired precision (maybe use a different param).
+  for(var goal in goals){ //for now, only returns for the first one if multiple
+    var result = this.Calculate(goal,params,decimals);
+    console.log("$"+parseFloat(result).toFixed(decimals)+" per month for "+parseFloat(params[seek]).toFixed(decimals)+" months");
+    if(result !== goals[goal]){
+      if(typeof(this.memory[params[seek]]) !== 'undefined'){
+        this.memory = []; //clear memory so object is re-useable
+        return parseFloat(params[seek]).toFixed(decimals);
+      } else {
+        this.memory[params[seek]] = result;
+        if(result > goals[goal]){ //I don't think this is universal...
+          params[seek] = params[seek]+increment;
+        } else {
+          params[seek] = params[seek]-increment;
+        }
+        return this.GoalSeek(seek,goals,params);
+      }
+    } else {
+      this.memory = []; //clear memory so object is re-useable
+      return parseFloat(params[seek]).toFixed(decimals);
+    }                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  
+  }
+};
